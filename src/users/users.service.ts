@@ -56,4 +56,14 @@ export class UsersService {
     await user.save();
     return user;
   }
+
+  async deleteUser(id: number) {
+    const user = await this.userRepository.findByPk(id);
+    if (!user) {
+      console.log(user);
+      throw new HttpException('Foydalunvchi topilmadi', HttpStatus.NOT_FOUND);
+    }
+    await this.userRepository.destroy({ where: { id } });
+    return user;
+  }
 }

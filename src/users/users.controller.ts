@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UseGuards,
   UsePipes,
@@ -51,5 +53,10 @@ export class UsersController {
   @Post('activate')
   activateUser(@Body() activateUserDto: ActivateUsersDto) {
     return this.userService.activateUser(activateUserDto);
+  }
+
+  @Delete('/:id')
+  deleteUser(@Param('id') id: number) {
+    return this.userService.deleteUser(id);
   }
 }

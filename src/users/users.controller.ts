@@ -55,6 +55,7 @@ export class UsersController {
     return this.userService.activateUser(activateUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   deleteUser(@Param('id') id: number) {
     return this.userService.deleteUser(id);

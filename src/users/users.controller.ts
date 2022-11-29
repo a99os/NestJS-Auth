@@ -66,6 +66,7 @@ export class UsersController {
   }
   @ApiOperation({ summary: 'Foydalanuvchi ma`lumotlarini yangilash' })
   @ApiResponse({ status: 201, type: User })
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUsersDto) {
     console.log('contr');

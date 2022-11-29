@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -15,6 +16,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ActivateUsersDto } from './dto/activate-user.dto';
 import { AddRoleDto } from './dto/add-role.dto';
 import { CreateUsersDto } from './dto/create-user.dto';
+import { UpdateUsersDto } from './dto/update-user.dto';
 import { User } from './users.model';
 import { UsersService } from './users.service';
 
@@ -55,9 +57,18 @@ export class UsersController {
     return this.userService.activateUser(activateUserDto);
   }
 
+  @ApiOperation({ summary: 'Foydalanuvchini  o`chirish' })
+  @ApiResponse({ status: 201, type: User })
   @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   deleteUser(@Param('id') id: number) {
     return this.userService.deleteUser(id);
+  }
+  @ApiOperation({ summary: 'Foydalanuvchi ma`lumotlarini yangilash' })
+  @ApiResponse({ status: 201, type: User })
+  @Put('/:id')
+  updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUsersDto) {
+    console.log('contr');
+    return this.userService.updateUser(updateUserDto, id);
   }
 }

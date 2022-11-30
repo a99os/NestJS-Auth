@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
-import { UnknownConstraintError } from 'sequelize';
 
 @Injectable()
 export class UserSelfGuard implements CanActivate {

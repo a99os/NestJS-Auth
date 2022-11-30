@@ -25,7 +25,6 @@ export class UserSelfGuard implements CanActivate {
       }
       return true;
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         'Ruhsat etilmagan foydalanuvchi',
         HttpStatus.FORBIDDEN,

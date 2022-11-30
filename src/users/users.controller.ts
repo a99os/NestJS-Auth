@@ -11,7 +11,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/decorators/roles-auth.decorators';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
 import { UserSelfGuard } from 'src/guards/user-self.guard';
 // import { ValidationPipe } from 'src/pipe/validation.pipe';
 import { ActivateUsersDto } from './dto/activate-user.dto';
@@ -45,6 +47,8 @@ export class UsersController {
   @ApiOperation({ summary: 'Foydalanuvchilarga role berish' })
   @ApiResponse({ status: 200, type: User })
   @UsePipes(ValidationPipe)
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Post('role')
   addRole(@Body() addRoleDto: AddRoleDto) {
     return this.userService.addRole(addRoleDto);

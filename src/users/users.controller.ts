@@ -11,7 +11,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 // import { ValidationPipe } from 'src/pipe/validation.pipe';
 import { ActivateUsersDto } from './dto/activate-user.dto';
 import { AddRoleDto } from './dto/add-role.dto';

@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { UserSelfGuard } from 'src/guards/user-self.guard';
 // import { ValidationPipe } from 'src/pipe/validation.pipe';
 import { ActivateUsersDto } from './dto/activate-user.dto';
 import { AddRoleDto } from './dto/add-role.dto';
@@ -59,11 +60,13 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Foydalanuvchini  o`chirish' })
   @ApiResponse({ status: 201, type: User })
+  @UseGuards(UserSelfGuard)
   @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   deleteUser(@Param('id') id: number) {
     return this.userService.deleteUser(id);
   }
+
   @ApiOperation({ summary: 'Foydalanuvchi ma`lumotlarini yangilash' })
   @ApiResponse({ status: 201, type: User })
   @UseGuards(JwtAuthGuard)
@@ -71,5 +74,22 @@ export class UsersController {
   updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUsersDto) {
     console.log('contr');
     return this.userService.updateUser(updateUserDto, id);
+  }
+
+  @ApiOperation({ summary: 'Foydalanuvchini  id bo`yicha olish' })
+  @ApiResponse({ status: 201, type: User })
+  @UseGuards(UserSelfGuard)
+  @UseGuards(JwtAuthGuard)
+  @Get('/:id')
+  getOneUser(@Param('id') id: number) {
+    return this.userService.getOneUser(id);
+  }
+
+  @ApiOperation({ summary: 'Foydalanuvchini  id bo`yicha olish' })
+  @ApiResponse({ status: 201, type: User })
+  @UseGuards(JwtAuthGuard)
+  @Get('admin/:id')
+  getOneUserByAdmin(@Param('id') id: number) {
+    return this.userService.getOneUser(id);
   }
 }

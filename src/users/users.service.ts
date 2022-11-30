@@ -106,4 +106,12 @@ export class UsersService {
       });
     }
   }
+
+  async getOneUser(id: number) {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
+    return user;
+  }
 }

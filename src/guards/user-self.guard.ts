@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { UnknownConstraintError } from 'sequelize';
 
 @Injectable()
-export class JwtAuthGuard implements CanActivate {
+export class UserSelfGuard implements CanActivate {
   constructor(private readonly jwtService: JwtService) {}
   canActivate(
     context: ExecutionContext,
